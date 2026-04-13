@@ -1,0 +1,13 @@
+schemaVersion: 1
+name: server-http-jdbc
+description: Application using Spring Web MVC, Spring Data JDBC, Flyway, PostgreSQL, and OpenTelemetry.
+packageName: com.example
+type: service
+license: Apache-2.0
+labels:
+  - spring-boot
+  - spring-webmvc
+  - spring-data-jdbc
+  - flyway
+  - postgresql
+  - opentelemetry

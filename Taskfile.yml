@@ -1,0 +1,50 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  REGISTRY: ghcr.io
+  TEMPLATES_BASE_REPOSITORY: arconia-io/arconia-templates
+  VERSION: '{{.VERSION | default "latest"}}'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  templates:publish:
+    desc: Publish the Template artifacts to the registry
+    cmds:
+      - |
+        arconia template push \
+          --base-ref {{.REGISTRY}}/{{.TEMPLATES_BASE_REPOSITORY}} \
+          --tag {{.VERSION}} \
+          --output-report template-push-report.json
+
+  templates:sign:
+    desc: Sign the Template artifacts with Cosign
+    cmds:
+      - |
+        jq -r '.artifacts[] | "\(.ref | split(":")[0])@\(.digest)"' template-push-report.json | while read -r artifact; do
+          cosign sign --yes "$artifact"
+        done
+
+  catalog:publish:
+    desc: Publish the Template Catalog artifact to the registry
+    cmds:
+      - |
+        arconia template catalog push \
+          --name arconia-project-templates \
+          --ref {{.REGISTRY}}/{{.TEMPLATES_BASE_REPOSITORY}}/catalog \
+          --tag {{.VERSION}} \
+          --from-report template-push-report.json \
+          --output-report template-catalog-push-report.json
+
+  catalog:sign:
+    desc: Sign the Template Catalog artifacts with Cosign
+    cmds:
+      - |
+        jq -r '.artifacts[] | "\(.ref | split(":")[0])@\(.digest)"' template-catalog-push-report.json | while read -r artifact; do
+          cosign sign --yes "$artifact"
+        done

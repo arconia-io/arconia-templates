@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: server-ai-rag
+  ai:
+    ollama:
+      init:
+        pull-model-strategy: when_missing
+      chat:
+        options:
+          model: ministral-3:8b
+      embedding:
+        options:
+          model: granite-embedding:278m
+    vectorstore:
+      pgvector:
+        dimensions: 768
+        index-type: hnsw
+  threads:
+    virtual:
+      enabled: true
+
+jobrunr:
+  jobs:
+    metrics:
+      enabled: true
+  background-job-server:
+    enabled: true
+  miscellaneous:
+    allow-anonymous-data-usage: false

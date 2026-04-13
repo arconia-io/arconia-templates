@@ -1,0 +1,14 @@
+schemaVersion: 1
+name: server-ai-rag
+description: Application using Spring AI, Ollama, PGvector, Docling, JobRunr, and OpenTelemetry.
+packageName: com.example
+type: service
+license: Apache-2.0
+labels:
+  - spring-boot
+  - spring-ai
+  - ollama
+  - pgvector
+  - docling
+  - jobrunr
+  - opentelemetry

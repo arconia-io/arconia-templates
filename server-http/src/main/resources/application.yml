@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: server-http
+  threads:
+    virtual:
+      enabled: true

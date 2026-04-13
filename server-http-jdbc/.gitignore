@@ -22,6 +22,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+node_modules
 HELP.md
 .gradle
 build/
@@ -60,7 +61,12 @@ out/
 ### VS Code ###
 .vscode/
 
-.devbox
+### Vaadin ###
+node_modules/
+src/main/bundles
+src/main/frontend/generated/
+pnpmfile.js
+vite.generated.ts
 
 ################################
 ############ MAC ###############

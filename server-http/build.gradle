@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.cyclonedx.bom' version '3.2.4'
+    id 'org.graalvm.buildtools.native' version '0.11.5'
+}
+
+group = "com.example"
+version = "0.0.1-SNAPSHOT"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+    set("arconiaVersion", "0.25.0")
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-webmvc"
+
+    implementation "io.arconia:arconia-opentelemetry-spring-boot-starter"
+
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+    testAndDevelopmentOnly "io.arconia:arconia-dev-services-lgtm"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-actuator-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-webmvc-test"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.arconia:arconia-bom:${arconiaVersion}"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add("-parameters")
+}
+
+tasks.named("test") {
+	useJUnitPlatform()
+}
+
+tasks.named("bootBuildImage") {
+    builder = "docker.io/paketobuildpacks/builder-noble-java-tiny"
+}

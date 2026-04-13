@@ -1,0 +1,11 @@
+schemaVersion: 1
+name: server-http
+description: Application using Spring Web MVC, Actuator, and OpenTelemetry.
+packageName: com.example
+type: service
+license: Apache-2.0
+labels:
+  - spring-boot
+  - spring-webmvc
+  - actuator
+  - opentelemetry

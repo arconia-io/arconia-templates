@@ -1,0 +1,9 @@
+jobrunr:
+  dashboard:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
