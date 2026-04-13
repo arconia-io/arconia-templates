@@ -60,6 +60,10 @@ arconia create --name my-app --template ghcr.io/arconia-io/arconia-templates/ser
 
 The [Arconia CLI documentation](https://docs.arconia.io/arconia-cli) covers all available commands, options, and workflows in detail.
 
+## 🛡️&nbsp; Security
+
+The security process for reporting vulnerabilities is described in [SECURITY.md](SECURITY.md).
+
 ## 🖊️&nbsp; License
 
 This project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) for more information.
