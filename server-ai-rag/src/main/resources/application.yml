@@ -6,11 +6,9 @@ spring:
       init:
         pull-model-strategy: when_missing
       chat:
-        options:
-          model: ministral-3:8b
+        model: ministral-3:8b
       embedding:
-        options:
-          model: granite-embedding:278m
+        model: granite-embedding:278m
     vectorstore:
       pgvector:
         dimensions: 768
